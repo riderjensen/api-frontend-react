@@ -8,11 +8,11 @@ export default class Home extends Component {
 	state = {
 		inputs: {
 			sub: {
-				placeholder: '',
+				placeholder: 'Choose one',
 				list: "subRedits",
 				name: 'sub',
 				required: true,
-				value: 'pics',
+				value: '',
 			},
 			firstDate: {
 				placeholder: 'YYYY-MM-DD',

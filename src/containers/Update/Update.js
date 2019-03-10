@@ -20,7 +20,7 @@ export default class Home extends Component {
 				list: "subRedits",
 				name: 'sub',
 				required: true,
-				value: 'pics',
+				value: '',
 			},
 			com: {
 				placeholder: 'Scanned',
