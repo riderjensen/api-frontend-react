@@ -1,0 +1,30 @@
+.Heads {
+    width: 100%;
+    height: 93vh;
+    position: fixed;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    border-top: 7px solid hsl(272, 11%, 48%);
+    display: block;
+    position: relative;
+}
+
+.Heads .Overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 5;
+}
+
+.Content {
+    width: 100%;
+    position: absolute;
+    top: 50px;
+}
+
+.Content .ContentBox {
+    max-width: 1200px;
+    margin: auto;
+    text-align: left;
+}
