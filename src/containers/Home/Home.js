@@ -46,18 +46,9 @@ export default class Home extends Component {
 						}
 						)}
 					</div>
-					<Button>Test</Button>
-					<h2>GraphQL</h2>
+					<Button>Rest Call</Button>
 
-					<div className="row">
-						{Object.keys(this.state.inputs).map((key, index) => {
-							return <div key={index} className="col-xs-12 col-sm-6">
-								<Input changeHandler={this.handleChange} inputSetters={this.state.inputs[key]} />
-							</div>
-						}
-						)}
-					</div>
-					<Button>Test</Button>
+					<Button>GraphQL Call</Button>
 				</div>
 				<div id="chartContainer" style={
 					{

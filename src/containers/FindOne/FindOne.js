@@ -290,19 +290,6 @@ export default class Home extends Component {
 						</div>
 					</div>
 				</div>
-
-				<div className="container">
-					<div className="row">
-						<div className="col-md-4 col-xs-12"></div>
-						<div className="col-md-4 col-xs-12">
-							<div className="card-body">
-								<p className="card-title" id="subTitle"></p>
-								<p className="card-text" id="information"></p>
-							</div>
-						</div>
-						<div className="col-md-4 col-xs-12"></div>
-					</div>
-				</div>
 			</div>
 		)
 	}
