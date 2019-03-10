@@ -309,7 +309,8 @@ export default class Home extends Component {
 								<input type="number" className="form-control" required={true} placeholder="5" />
 							</div>
 
-							<button className="btn btn-primary" id="submitButton">Submit</button>
+							<button className="btn btn-primary" id="submitButton">Rest Call</button>
+							<button className="btn btn-primary" id="submitButton">GraphQL Call</button>
 
 						</div>
 						<div className="col-md-4 col-xs-12"></div>

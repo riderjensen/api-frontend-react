@@ -25,7 +25,8 @@ export default class Home extends Component {
 					<div className="row">
 						<div className="col-md-4 col-xs-12"></div>
 						<div className="form-group col-md-4 col-xs-12">
-							<button className="btn btn-primary" onClick={this.createOrder}>Click to create a new entry</button>
+							<button className="btn btn-primary" onClick={this.createOrder}>Rest Call</button>
+							<button className="btn btn-primary">GraphQL Call</button>
 							<p className="card-text">Your ID:</p>
 							<p className="card-title">{this.state.id}</p>
 						</div>

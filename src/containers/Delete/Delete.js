@@ -38,7 +38,8 @@ export default class Home extends Component {
 							<input type="text" onChange={this.handleChange} className="form-control" required={true} placeholder="" />
 							<small className="form-text text-muted">You are only allowed to delete entries that you have made with
 						your generated ID.</small>
-							<button className="btn btn-primary" onClick={this.deleteOrder}>Click to delete your entry</button>
+							<button className="btn btn-primary" onClick={this.deleteOrder}>Rest Call</button>
+							<button className="btn btn-primary">GraphQL Call</button>
 						</div>
 					</div>
 					<div className="col-md-4 col-xs-12"></div>

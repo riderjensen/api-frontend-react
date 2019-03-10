@@ -46,9 +46,8 @@ export default class Home extends Component {
 						}
 						)}
 					</div>
-					<Button>Rest Call</Button>
-
-					<Button>GraphQL Call</Button>
+					<button className="btn btn-primary" id="submitButton">Rest Call</button>
+					<button className="btn btn-primary" id="submitButton">GraphQL Call</button>
 				</div>
 				<div id="chartContainer" style={
 					{

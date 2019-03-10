@@ -285,7 +285,8 @@ export default class Home extends Component {
 							</div>
 
 
-							<button className="btn btn-primary" id="submitButton">Submit</button>
+							<button className="btn btn-primary" id="submitButton">Rest Call</button>
+							<button className="btn btn-primary" id="submitButton">GraphQL Call</button>
 
 						</div>
 					</div>
