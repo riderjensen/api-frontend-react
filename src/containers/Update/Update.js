@@ -332,3 +332,36 @@ export default class Home extends Component {
 		)
 	}
 }
+
+
+// document.getElementById('submitButton').addEventListener('click', () => {
+// 	const subID = document.getElementById('theSubID').value;
+// 	const subNameUpdate = document.getElementById('subNameUpdate').value;
+// 	const subScanned = document.getElementById('subScanned').value;
+// 	const subFound = document.getElementById('subFound').value;
+
+// 	const newObj = {
+// 		"items": {}
+// 	}
+// 	newObj.items[`r/${subNameUpdate}`] = {
+// 		"com": subScanned,
+// 		"found": subFound
+// 	}
+
+// 	console.log(newObj)
+
+// 	fetch(`https://riderjensen.com/api/update/${subID}`, {
+// 			method: "PUT",
+// 			headers: {
+// 				"Content-Type": "application/json",
+// 			},
+// 			body: JSON.stringify(newObj)
+// 		})
+// 		.then(function (response) {
+// 			return response.json();
+// 		})
+// 		.then((myJson) => {
+// 			document.getElementById('subTitle').innerText = `Your item with the id ${myJson._id} was updated`;
+// 		})
+// 		.catch(err => console.log(err));
+// })

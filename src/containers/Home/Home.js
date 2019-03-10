@@ -70,3 +70,29 @@ export default class Home extends Component {
 		)
 	}
 }
+
+
+// document.getElementById('submitButton').addEventListener('click', () => {
+// 	const firstDate = document.getElementById('firstDate').value;
+// 	const secondDate = document.getElementById('secondDate').value;
+
+// 	fetch(`https://riderjensen.com/api/range/${firstDate}$${secondDate}`)
+// 		.then(function (response) {
+// 			console.log(response)
+// 			return response.json();
+// 		})
+// 		.then(function (myJson) {
+// 			let newChart = new CanvasJS.Chart("chartContainer", {
+// 				title: {
+// 					text: `Number of F words said per 100`
+// 				},
+// 				data: [{
+// 					// Change type to "doughnut", "line", "splineArea", etc.
+// 					type: "column",
+// 					dataPoints: myJson
+// 				}]
+// 			});
+// 			newChart.render();
+// 		})
+// 		.catch(err => console.log(err));
+// })

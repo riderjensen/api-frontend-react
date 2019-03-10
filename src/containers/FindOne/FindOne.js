@@ -307,3 +307,32 @@ export default class Home extends Component {
 		)
 	}
 }
+
+
+// document.getElementById('submitButton').addEventListener('click', () => {
+// 	const firstDate = document.getElementById('firstDate').value;
+// 	const secondDate = document.getElementById('secondDate').value;
+// 	const subRedit = document.getElementById('subRedit').value;
+
+// 	let extraString = '';
+// 	if (firstDate != '' && secondDate != '') {
+// 		extraString = `${firstDate}$${secondDate}`
+// 	}
+
+// 	fetch(`https://riderjensen.com/api/${subRedit}/${extraString}`)
+// 		.then(function (response) {
+// 			console.log(response)
+// 			return response.json();
+// 		})
+// 		.then((myJson) => {
+// 			console.log(myJson)
+// 			document.getElementById('subTitle').innerText = `r/${subRedit}`;
+// 			document.getElementById('information').innerHTML =
+// 				`
+// 			<p>Number of items processed: ${myJson.com}</p>
+// 			<p>Number of items found: ${myJson.found}</p>
+// 			<p>Ratio per one hundered words: ${(myJson.found/myJson.com) * 100}</p>
+// 			`
+// 		})
+// 		.catch(err => console.log(err));
+// })
