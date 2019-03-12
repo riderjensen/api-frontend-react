@@ -88,7 +88,7 @@ export default class Home extends Component {
 						}
 						)}
 					</div>
-					<button className="btn btn-primary" onClick={this.getRestCall}>Rest Call</button>
+					<button className="btn btn-primary" onClick={this.getRestCall}>Generate</button>
 					{test}
 				</div>
 			</MainCta >
