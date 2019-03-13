@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Mutation } from "react-apollo";
+import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
 import axios from '../../axios-api';
@@ -53,6 +53,36 @@ export default class Home extends Component {
 	}
 
 	render() {
+
+		// const zip = gql`{ getAllItems{
+		// 		id
+		// 	updatedAt
+		// 		createdAt
+		// 	items{
+		// 		funny{
+		// 			com
+		// 			found
+		// 			}
+		// 		}
+		// 	}
+		// }
+		// `
+
+
+		const firstDate = new Date(this.state.inputs.firstDate.value).getTime();
+		const secondDate = new Date(this.state.inputs.secondDate.value).getTime();
+		const sweetVictory = gql`
+		query GetCombinedRange($firstDate: Int!, $secondDate: Int!, $sub: String!) {
+			getCombinedRange(start: $firstDate end: $secondDate) {
+			  items{
+				  $sub{
+					  com
+					  found
+				  }
+			  }
+			}
+		  }`
+
 		return (
 			<div>
 				<div className="container">
@@ -320,29 +350,18 @@ export default class Home extends Component {
 							}
 							)}
 							<button className="btn btn-primary" onClick={this.getRestCall}>Rest Call</button>
-							{/* <Mutation mutation={gql`
-								mutation getCombinedRange{
-										getCombinedRange(start: ${new Date(this.state.inputs.firstDate.value).getTime()}, end: ${new Date(this.state.inputs.secondDate.value).getTime()}) {
-											items{
-												${this.state.inputs.sub.value}{
-													com
-													found
-												}
-											}
-										}
-									}
-								
-								
-								`}> */}
-							<Mutation mutation={gql`
-								mutation deleteOne{
-									deleteDataPoint(id: "${this.state.inputs.firstDate}")
-								}
-							`}>
-								{(deleteOne) => (
-									<button className="btn btn-primary" onClick={() => deleteOne().then(resp => console.log(resp))}>GraphQL Call</button>
-								)}
-							</Mutation>
+							<Query query={sweetVictory}>
+								{({ loading, error, data }) => {
+									if (loading) return <p>Loading...</p>;
+									if (error) return <p>Error :(</p>;
+
+									return data.getAllItems.map((item) => (
+										<div key={item.id}>
+											<p>{item.updatedAt}</p>
+										</div>
+									));
+								}}
+							</Query>
 
 						</div>
 					</div>

@@ -65,17 +65,17 @@ export default class Home extends Component {
 								query={gql`
 									{
 										getAllItems{
-											id
-										updatedAt
-											createdAt
-										items{
-											funny{
-												com
-												found
+												id
+												updatedAt
+												createdAt
+												items{
+													funny{
+														com
+														found
+													}
 												}
 											}
 										}
-									}
 									`}
 							>
 								{({ loading, error, data }) => {
