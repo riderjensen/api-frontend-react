@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
 
 import axios from '../../axios-api';
 import Input from '../../components/UI/Input/Input';
@@ -36,7 +38,8 @@ export default class Home extends Component {
 				type: 'number',
 				value: '5',
 			}
-		}
+		},
+		updated: false
 
 	}
 
@@ -349,6 +352,11 @@ export default class Home extends Component {
 								<option value="math" />
 								<option value="legaladvice" />
 							</datalist>
+
+							{this.state.updated ? <div style={{
+								color: 'green'
+							}
+							}>Item is updated</div> : null}
 							{Object.keys(this.state.inputs).map((key, index) => {
 								return <div key={index} className="col-xs-12 col-sm-6">
 									<div className="form-group">
@@ -359,7 +367,22 @@ export default class Home extends Component {
 							)}
 
 							<button className="btn btn-primary" onClick={this.getRestCall}>Rest Call</button>
-							<button className="btn btn-primary">GraphQL Call</button>
+
+							<Mutation mutation={gql`
+								mutation editOne{
+									editItem(id: "${this.state.inputs.myId.value}" sub: "${this.state.inputs.sub.value}" completedFound: {
+										com: ${this.state.inputs.com.value},
+										found: ${this.state.inputs.found.value}
+									})
+								}
+							`}>
+								{(editItem) => (
+									<button className="btn btn-primary" onClick={() => {
+										this.setState({ updated: false })
+										editItem().then(resp => this.setState({ updated: resp.data.editItem }))
+									}}>GraphQL Call</button>
+								)}
+							</Mutation>
 
 						</div>
 						<div className="col-md-4 col-xs-12"></div>
@@ -371,3 +394,4 @@ export default class Home extends Component {
 }
 
 
+// 5c895c05ae37614cd13b2f26

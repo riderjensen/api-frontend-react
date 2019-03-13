@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { ApolloConsumer } from "react-apollo";
+import gql from "graphql-tag";
 
 import axios from '../../axios-api';
 import Input from '../../components/UI/Input/Input';
@@ -12,7 +14,7 @@ export default class Home extends Component {
 				list: "subRedits",
 				name: 'sub',
 				required: true,
-				value: '',
+				value: 'funny',
 			},
 			firstDate: {
 				placeholder: 'YYYY-MM-DD',
@@ -40,27 +42,6 @@ export default class Home extends Component {
 			.catch(err => console.log(err));
 	}
 
-	getGraphqlCall = () => {
-		const graphqlQuery = {
-			query: `getRange( start: "${new Date(this.state.inputs.firstDate.value).getTime()}" end: "${new Date(this.state.inputs.secondDate.value).getTime()}" sub: "${this.state.inputs.sub.value}") {
-					com
-					found
-			}
-			`
-		};
-
-		axios.post('/sub', {
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(graphqlQuery)
-		}).then((myJson) => {
-			console.log(myJson)
-		})
-			.catch(err => console.log(err));
-	}
-
-
 	handleChange = (val, name) => {
 		const newState = { ...this.state.inputs };
 		newState[name].value = val;
@@ -72,12 +53,13 @@ export default class Home extends Component {
 	}
 
 	render() {
+		const secondDate = new Date(this.state.inputs.secondDate.value).getTime();
+
 		return (
 			<div>
 				<div className="container">
 					<div className="row">
 						<div className="form-group col-md-6 col-xs-12">
-
 							<datalist id="subRedits">
 								<option value="funny" />
 								<option value="AskReddit" />
@@ -339,8 +321,44 @@ export default class Home extends Component {
 							}
 							)}
 							<button className="btn btn-primary" onClick={this.getRestCall}>Rest Call</button>
-							<button className="btn btn-primary" onClick={this.getGraphqlCall}>GraphQL Call</button>
+							<ApolloConsumer>
+								{client => (
+									<div>
+										<button className="btn btn-primary"
+											onClick={async () => {
+												const { data } = await client.query({
+													query: gql`query getCombined {
+														getCombinedRange(start: "0" end: "${secondDate}") {
+															items{
+																${this.state.inputs.sub.value}{
+																	com
+																	found
+																}
+															}
+														}
+													}`,
+												});
+												console.log(data)
+											}}
+										>
+											GraphQL Call
+           					 </button>
+									</div>
+								)}
 
+							</ApolloConsumer>
+							{/* <Query query={sweetVictory}>
+								{({ loading, error, data }) => {
+									if (loading) return <p>Loading...</p>;
+									if (error) return <p>Error :(</p>;
+
+									return data.getAllItems.map((item) => (
+										<div key={item.id}>
+											<p>{item.updatedAt}</p>
+										</div>
+									));
+								}}
+							</Query> */}
 						</div>
 					</div>
 				</div>

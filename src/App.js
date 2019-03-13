@@ -6,8 +6,10 @@ import Create from './containers/Create/Create';
 import FindOne from './containers/FindOne/FindOne';
 import Update from './containers/Update/Update';
 import Delete from './containers/Delete/Delete';
-
 import Nav from './components/Nav/Nav';
+
+
+
 
 class App extends Component {
 	render() {
@@ -22,6 +24,7 @@ class App extends Component {
 					<Route path="/" component={Home} />
 				</Switch>
 			</div>
+
 		);
 	}
 }

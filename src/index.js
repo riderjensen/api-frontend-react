@@ -4,8 +4,16 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import ApolloClient from 'apollo-boost';
+import {
+	ApolloProvider
+} from 'react-apollo';
 
-const myApp = <BrowserRouter ><App /></BrowserRouter >
+const client = new ApolloClient({
+	uri: 'https://riderjensen.com/sub',
+})
+
+const myApp = <ApolloProvider client={client}><BrowserRouter><App /></BrowserRouter></ApolloProvider>
 
 ReactDOM.render(myApp, document.getElementById('root'));
 
