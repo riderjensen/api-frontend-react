@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../../axios-api.js';
 
-import { Query, Mutation } from "react-apollo";
+import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 
 export default class Home extends Component {
@@ -12,7 +12,6 @@ export default class Home extends Component {
 	createOrder = () => {
 		axios.post('/api/create')
 			.then(resp => {
-				console.log(resp)
 				this.setState({
 					id: resp.data._id
 				})
@@ -49,10 +48,20 @@ export default class Home extends Component {
 									</div>
 								)}
 							</Mutation>
+						</div>
+						<div className="col-md-4 col-xs-12"></div>
+					</div>
+				</div>
+			</div>
+		)
+	}
+}
 
 
 
-							{/* <Query
+
+
+{/* <Query
 								query={gql`
 									{
 										getAllItems{
@@ -80,11 +89,3 @@ export default class Home extends Component {
 									));
 								}}
 							</Query> */}
-						</div>
-						<div className="col-md-4 col-xs-12"></div>
-					</div>
-				</div>
-			</div>
-		)
-	}
-}

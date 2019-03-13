@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
 
 import axios from '../../axios-api';
 import Input from '../../components/UI/Input/Input';
@@ -39,27 +41,6 @@ export default class Home extends Component {
 			})
 			.catch(err => console.log(err));
 	}
-
-	getGraphqlCall = () => {
-		const graphqlQuery = {
-			query: `getRange( start: "${new Date(this.state.inputs.firstDate.value).getTime()}" end: "${new Date(this.state.inputs.secondDate.value).getTime()}" sub: "${this.state.inputs.sub.value}") {
-					com
-					found
-			}
-			`
-		};
-
-		axios.post('/sub', {
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(graphqlQuery)
-		}).then((myJson) => {
-			console.log(myJson)
-		})
-			.catch(err => console.log(err));
-	}
-
 
 	handleChange = (val, name) => {
 		const newState = { ...this.state.inputs };
@@ -339,7 +320,29 @@ export default class Home extends Component {
 							}
 							)}
 							<button className="btn btn-primary" onClick={this.getRestCall}>Rest Call</button>
-							<button className="btn btn-primary" onClick={this.getGraphqlCall}>GraphQL Call</button>
+							{/* <Mutation mutation={gql`
+								mutation getCombinedRange{
+										getCombinedRange(start: ${new Date(this.state.inputs.firstDate.value).getTime()}, end: ${new Date(this.state.inputs.secondDate.value).getTime()}) {
+											items{
+												${this.state.inputs.sub.value}{
+													com
+													found
+												}
+											}
+										}
+									}
+								
+								
+								`}> */}
+							<Mutation mutation={gql`
+								mutation deleteOne{
+									deleteDataPoint(id: "${this.state.inputs.firstDate}")
+								}
+							`}>
+								{(deleteOne) => (
+									<button className="btn btn-primary" onClick={() => deleteOne().then(resp => console.log(resp))}>GraphQL Call</button>
+								)}
+							</Mutation>
 
 						</div>
 					</div>

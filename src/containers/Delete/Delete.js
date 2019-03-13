@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+
 import axios from '../../axios-api.js';
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
+
 import Input from '../../components/UI/Input/Input';
 export default class Home extends Component {
 	state = {
@@ -12,6 +16,7 @@ export default class Home extends Component {
 				value: '',
 			}
 		},
+		deleted: false
 	}
 
 
@@ -36,28 +41,15 @@ export default class Home extends Component {
 			});
 	}
 
-	deleteOrderGraphQL = () => {
-		const graphqlQuery = {
-			mutation: `deleteDataPoint(id: ${this.state.inputs.id.value})`
-		};
-		axios.post('/sub', {
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(graphqlQuery)
-		}).then((myJson) => {
-			console.log(myJson)
-		})
-			.catch(err => console.log(err));
-	}
-
 	render() {
+
 		return (
 			<div>
 				<div className="container">
 					<div className="row">
 						<div className="col-md-4 col-xs-12"></div>
 						<div className="form-group col-xs-12 col-md-4">
+							{this.state.deleted ? <div>Item has been deleted</div> : <div>Item has NOT been deleted</div>}
 							{Object.keys(this.state.inputs).map((key, index) => {
 								return <div key={index} className="col-xs-12 col-sm-6">
 									<Input changeHandler={this.handleChange} inputSetters={this.state.inputs[key]} />
@@ -67,7 +59,18 @@ export default class Home extends Component {
 							<small className="form-text text-muted">You are only allowed to delete entries that you have made with
 						your generated ID.</small>
 							<button className="btn btn-primary" onClick={this.deleteOrderRest}>Rest Call</button>
-							<button className="btn btn-primary" onClick={this.deleteOrderGraphQL}>GraphQL Call</button>
+
+							<Mutation mutation={gql`
+								mutation deleteOne{
+									deleteDataPoint(id: "${this.state.inputs.id.value}")
+								}
+							`}>
+								{(deleteOne) => (
+									<button className="btn btn-primary" onClick={() => deleteOne().then(resp => this.setState({ deleted: resp.data.deleteDataPoints }))}>GraphQL Call</button>
+								)}
+							</Mutation>
+
+
 						</div>
 					</div>
 					<div className="col-md-4 col-xs-12"></div>
@@ -76,5 +79,4 @@ export default class Home extends Component {
 		)
 	}
 }
-
 
