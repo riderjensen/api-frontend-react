@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Query } from "react-apollo";
+import { ApolloConsumer } from "react-apollo";
 import gql from "graphql-tag";
 
 import axios from '../../axios-api';
@@ -14,7 +14,7 @@ export default class Home extends Component {
 				list: "subRedits",
 				name: 'sub',
 				required: true,
-				value: '',
+				value: 'funny',
 			},
 			firstDate: {
 				placeholder: 'YYYY-MM-DD',
@@ -53,42 +53,13 @@ export default class Home extends Component {
 	}
 
 	render() {
-
-		// const zip = gql`{ getAllItems{
-		// 		id
-		// 	updatedAt
-		// 		createdAt
-		// 	items{
-		// 		funny{
-		// 			com
-		// 			found
-		// 			}
-		// 		}
-		// 	}
-		// }
-		// `
-
-
-		const firstDate = new Date(this.state.inputs.firstDate.value).getTime();
 		const secondDate = new Date(this.state.inputs.secondDate.value).getTime();
-		const sweetVictory = gql`
-		query GetCombinedRange($firstDate: Int!, $secondDate: Int!, $sub: String!) {
-			getCombinedRange(start: $firstDate end: $secondDate) {
-			  items{
-				  $sub{
-					  com
-					  found
-				  }
-			  }
-			}
-		  }`
 
 		return (
 			<div>
 				<div className="container">
 					<div className="row">
 						<div className="form-group col-md-6 col-xs-12">
-
 							<datalist id="subRedits">
 								<option value="funny" />
 								<option value="AskReddit" />
@@ -350,7 +321,33 @@ export default class Home extends Component {
 							}
 							)}
 							<button className="btn btn-primary" onClick={this.getRestCall}>Rest Call</button>
-							<Query query={sweetVictory}>
+							<ApolloConsumer>
+								{client => (
+									<div>
+										<button className="btn btn-primary"
+											onClick={async () => {
+												const { data } = await client.query({
+													query: gql`query getCombined {
+														getCombinedRange(start: "0" end: "${secondDate}") {
+															items{
+																${this.state.inputs.sub.value}{
+																	com
+																	found
+																}
+															}
+														}
+													}`,
+												});
+												console.log(data)
+											}}
+										>
+											GraphQL Call
+           					 </button>
+									</div>
+								)}
+
+							</ApolloConsumer>
+							{/* <Query query={sweetVictory}>
 								{({ loading, error, data }) => {
 									if (loading) return <p>Loading...</p>;
 									if (error) return <p>Error :(</p>;
@@ -361,8 +358,7 @@ export default class Home extends Component {
 										</div>
 									));
 								}}
-							</Query>
-
+							</Query> */}
 						</div>
 					</div>
 				</div>

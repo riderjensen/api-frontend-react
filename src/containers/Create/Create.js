@@ -56,36 +56,3 @@ export default class Home extends Component {
 		)
 	}
 }
-
-
-
-
-
-{/* <Query
-								query={gql`
-									{
-										getAllItems{
-												id
-												updatedAt
-												createdAt
-												items{
-													funny{
-														com
-														found
-													}
-												}
-											}
-										}
-									`}
-							>
-								{({ loading, error, data }) => {
-									if (loading) return <p>Loading...</p>;
-									if (error) return <p>Error :(</p>;
-
-									return data.getAllItems.map((item) => (
-										<div key={item.id}>
-											<p>{item.updatedAt}</p>
-										</div>
-									));
-								}}
-							</Query> */}
