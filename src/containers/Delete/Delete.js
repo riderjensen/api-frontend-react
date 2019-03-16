@@ -4,6 +4,7 @@ import axios from '../../axios-api.js';
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 
+import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 export default class Home extends Component {
 	state = {
@@ -56,9 +57,11 @@ export default class Home extends Component {
 								</div>
 							}
 							)}
-							<small className="form-text text-muted">You are only allowed to delete entries that you have made with
-						your generated ID.</small>
-							<button className="btn btn-primary" onClick={this.deleteOrderRest}>Rest Call</button>
+							<p style={{
+								color: 'white'
+							}} className="form-text">You are only allowed to delete entries that you have made with
+						your generated ID.</p>
+							<Button onClick={this.deleteOrderRest}>Rest Call</Button>
 
 							<Mutation mutation={gql`
 								mutation deleteOne{
@@ -66,7 +69,7 @@ export default class Home extends Component {
 								}
 							`}>
 								{(deleteOne) => (
-									<button className="btn btn-primary" onClick={() => deleteOne().then(resp => this.setState({ deleted: resp.data.deleteDataPoints }))}>GraphQL Call</button>
+									<Button className="btn btn-primary" onClick={() => deleteOne().then(resp => this.setState({ deleted: resp.data.deleteDataPoints }))}>GraphQL Call</Button>
 								)}
 							</Mutation>
 

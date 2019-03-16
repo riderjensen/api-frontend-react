@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import MainCta from '../../components/Home/Header/Heads';
 import Input from '../../components/UI/Input/Input';
+import Button from '../../components/UI/Button/Button';
 
 import axios from '../../axios-api';
 
@@ -16,14 +16,14 @@ export default class Home extends Component {
 				name: 'firstDate',
 				required: true,
 				type: 'text',
-				value: '2019-03-08',
+				value: '2019-03-05',
 			},
 			secondDate: {
 				placeholder: 'Second Date',
 				name: 'secondDate',
 				required: true,
 				type: 'text',
-				value: '2019-03-10',
+				value: '2019-03-15',
 			}
 		},
 		dataPoints: [
@@ -77,21 +77,19 @@ export default class Home extends Component {
 		this.state.dataPoints.length !== 0 ? test = <CanvasJSChart options={options} onRef={ref => this.chart = ref} /> : test = null;
 
 		return (
-			<MainCta>
-				<div className="container">
-					<h2>REST API</h2>
-					<div className="row">
-						{Object.keys(this.state.inputs).map((key, index) => {
-							return <div key={index} className="col-xs-12 col-sm-6">
-								<Input changeHandler={this.handleChange} inputSetters={this.state.inputs[key]} />
-							</div>
-						}
-						)}
-					</div>
-					<button className="btn btn-primary" onClick={this.getRestCall}>Generate</button>
-					{test}
+			<div className="container">
+				<h2>Graph comparing subreddits</h2>
+				<div className="row">
+					{Object.keys(this.state.inputs).map((key, index) => {
+						return <div key={index} className="col-xs-12 col-sm-6">
+							<Input changeHandler={this.handleChange} inputSetters={this.state.inputs[key]} />
+						</div>
+					}
+					)}
 				</div>
-			</MainCta >
+				<Button onClick={this.getRestCall}>Generate</Button>
+				{test}
+			</div>
 		)
 	}
 }
