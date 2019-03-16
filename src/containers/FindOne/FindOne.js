@@ -30,6 +30,10 @@ export default class Home extends Component {
 				type: 'text',
 				value: '2019-03-10',
 			}
+		},
+		returnedInformation: {
+			completed: null,
+			found: null
 		}
 	}
 
@@ -37,7 +41,15 @@ export default class Home extends Component {
 	getRestCall = () => {
 		axios.get(`/api/${this.state.inputs.sub.value}/${this.state.inputs.firstDate.value}$${this.state.inputs.secondDate.value}`)
 			.then((myJson) => {
-				console.log(myJson)
+				const newState = { ...this.state };
+				this.setState({
+					...newState,
+					returnedInformation: {
+						com: myJson.data.com,
+						found: myJson.data.found
+
+					}
+				})
 			})
 			.catch(err => console.log(err));
 	}
@@ -48,12 +60,12 @@ export default class Home extends Component {
 		this.setState({
 			inputs: newState
 		})
-		console.log(this.state)
 
 	}
 
 	render() {
 		const secondDate = new Date(this.state.inputs.secondDate.value).getTime();
+		const firstDate = new Date(this.state.inputs.firstDate.value).getTime();
 
 		return (
 			<div>
@@ -328,7 +340,7 @@ export default class Home extends Component {
 											onClick={async () => {
 												const { data } = await client.query({
 													query: gql`query getCombined {
-														getCombinedRange(start: "0" end: "${secondDate}") {
+														getCombinedRange(start: "${firstDate}" end: "${secondDate}") {
 															items{
 																${this.state.inputs.sub.value}{
 																	com
@@ -338,7 +350,15 @@ export default class Home extends Component {
 														}
 													}`,
 												});
-												console.log(data)
+												const newState = { ...this.state };
+												this.setState({
+													...newState,
+													returnedInformation: {
+														com: data.getCombinedRange.items[this.state.inputs.sub.value].com,
+														found: data.getCombinedRange.items[this.state.inputs.sub.value].found
+
+													}
+												})
 											}}
 										>
 											GraphQL Call
@@ -347,19 +367,14 @@ export default class Home extends Component {
 								)}
 
 							</ApolloConsumer>
-							{/* <Query query={sweetVictory}>
-								{({ loading, error, data }) => {
-									if (loading) return <p>Loading...</p>;
-									if (error) return <p>Error :(</p>;
-
-									return data.getAllItems.map((item) => (
-										<div key={item.id}>
-											<p>{item.updatedAt}</p>
-										</div>
-									));
-								}}
-							</Query> */}
+							<p>Comments scanned - {this.state.returnedInformation.com}</p>
+							<p>Items found - {this.state.returnedInformation.found}</p>
 						</div>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-md-6 col-xs-12">
+
 					</div>
 				</div>
 			</div>
