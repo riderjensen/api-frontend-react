@@ -56,8 +56,10 @@ export default class Home extends Component {
 								</div>
 							}
 							)}
-							<small className="form-text text-muted">You are only allowed to delete entries that you have made with
-						your generated ID.</small>
+							<p style={{
+								color: 'white'
+							}} className="form-text">You are only allowed to delete entries that you have made with
+						your generated ID.</p>
 							<button className="btn btn-primary" onClick={this.deleteOrderRest}>Rest Call</button>
 
 							<Mutation mutation={gql`
