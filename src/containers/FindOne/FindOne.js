@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { ApolloConsumer } from "react-apollo";
 import gql from "graphql-tag";
 
+
+import Button from '../../components/UI/Button/Button';
 import axios from '../../axios-api';
 import Input from '../../components/UI/Input/Input';
 
@@ -332,11 +334,11 @@ export default class Home extends Component {
 								</div>
 							}
 							)}
-							<button className="btn btn-primary" onClick={this.getRestCall}>Rest Call</button>
+							<Button onClick={this.getRestCall}>Rest Call</Button>
 							<ApolloConsumer>
 								{client => (
 									<div>
-										<button className="btn btn-primary"
+										<Button
 											onClick={async () => {
 												const { data } = await client.query({
 													query: gql`query getCombined {
@@ -362,7 +364,7 @@ export default class Home extends Component {
 											}}
 										>
 											GraphQL Call
-           					 </button>
+           					 </Button>
 									</div>
 								)}
 

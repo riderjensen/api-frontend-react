@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 
 import axios from '../../axios-api';
 import Input from '../../components/UI/Input/Input';
+import Button from '../../components/UI/Button/Button';
 
 export default class Home extends Component {
 
@@ -366,7 +367,7 @@ export default class Home extends Component {
 							}
 							)}
 
-							<button className="btn btn-primary" onClick={this.getRestCall}>Rest Call</button>
+							<Button className="btn btn-primary" onClick={this.getRestCall}>Rest Call</Button>
 
 							<Mutation mutation={gql`
 								mutation editOne{
@@ -377,10 +378,10 @@ export default class Home extends Component {
 								}
 							`}>
 								{(editItem) => (
-									<button className="btn btn-primary" onClick={() => {
+									<Button className="btn btn-primary" onClick={() => {
 										this.setState({ updated: false })
 										editItem().then(resp => this.setState({ updated: resp.data.editItem }))
-									}}>GraphQL Call</button>
+									}}>GraphQL Call</Button>
 								)}
 							</Mutation>
 
