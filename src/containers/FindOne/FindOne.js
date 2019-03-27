@@ -23,14 +23,14 @@ export default class Home extends Component {
 				name: 'firstDate',
 				required: true,
 				type: 'text',
-				value: '2019-03-08',
+				value: '2019-03-28',
 			},
 			secondDate: {
 				placeholder: 'YYYY-MM-DD',
 				name: 'secondDate',
 				required: true,
 				type: 'text',
-				value: '2019-03-10',
+				value: '2019-03-30',
 			}
 		},
 		returnedInformation: {
