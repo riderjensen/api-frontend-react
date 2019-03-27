@@ -16,14 +16,14 @@ export default class Home extends Component {
 				name: 'firstDate',
 				required: true,
 				type: 'text',
-				value: '2019-03-05',
+				value: '2019-03-28',
 			},
 			secondDate: {
 				placeholder: 'Second Date',
 				name: 'secondDate',
 				required: true,
 				type: 'text',
-				value: '2019-03-15',
+				value: '2019-03-30',
 			}
 		},
 		dataPoints: [
