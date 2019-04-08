@@ -27,14 +27,14 @@ export default class Home extends Component {
 			},
 			com: {
 				placeholder: 'Scanned',
-				name: 'sub',
+				name: 'com',
 				required: true,
 				type: 'number',
 				value: '10',
 			},
 			found: {
 				placeholder: 'Found',
-				name: 'sub',
+				name: 'found',
 				required: true,
 				type: 'number',
 				value: '5',
@@ -359,6 +359,7 @@ export default class Home extends Component {
 							}
 							}>Item is updated</div> : null}
 							{Object.keys(this.state.inputs).map((key, index) => {
+
 								return <div key={index} className="col-xs-12 col-sm-6">
 									<div className="form-group">
 										<Input changeHandler={this.handleChange} inputSetters={this.state.inputs[key]} />
