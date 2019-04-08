@@ -356,8 +356,8 @@ export default class Home extends Component {
 												this.setState({
 													...newState,
 													returnedInformation: {
-														com: data.getCombinedRange.items[this.state.inputs.sub.value].com,
-														found: data.getCombinedRange.items[this.state.inputs.sub.value].found
+														com: data.getCombinedRange.items[this.state.inputs.sub.value] ? data.getCombinedRange.items[this.state.inputs.sub.value].com : 0 || 0,
+														found: data.getCombinedRange.items[this.state.inputs.sub.value] ? data.getCombinedRange.items[this.state.inputs.sub.value].found : 0 || 0
 
 													}
 												})
