@@ -373,15 +373,19 @@ export default class Home extends Component {
 							<Mutation mutation={gql`
 								mutation editOne{
 									editItem(id: "${this.state.inputs.myId.value}" sub: "${this.state.inputs.sub.value}" completedFound: {
-										com: ${this.state.inputs.com.value},
-										found: ${this.state.inputs.found.value}
+										com: ${this.state.inputs.com.value || 0},
+										found: ${this.state.inputs.found.value || 0}
 									})
 								}
 							`}>
 								{(editItem) => (
 									<Button className="btn btn-primary" onClick={() => {
 										this.setState({ updated: false })
-										editItem().then(resp => this.setState({ updated: resp.data.editItem }))
+										editItem().then(resp => {
+											//error here
+											console.log(resp)
+											this.setState({ updated: resp.data.editItem })
+										}).catch(err => console.log(err))
 									}}>GraphQL Call</Button>
 								)}
 							</Mutation>
